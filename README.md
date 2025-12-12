@@ -5,6 +5,30 @@
 ![](https://github-readme-stats.vercel.app/api?username=Codey-Rocky&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
 ![](https://nirzak-streak-stats.vercel.app/?user=Codey-Rocky&theme=dark&hide_border=false)<br/>
 ![](https://github-readme-stats.vercel.app/api/top-langs/?username=Codey-Rocky&theme=dark&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
+name: Generate Snake
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # every day at midnight
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: Platane/snk@v3
+        with:
+          github_user_name: khushi-dhir
+          outputs: |
+            dist/github-contribution-grid-snake.svg
+
+      - name: Push to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: output
+          build_dir: dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 ## 🏆 GitHub Trophies
 ![](https://github-profile-trophy.vercel.app/?username=Codey-Rocky&theme=radical&no-frame=false&no-bg=false&margin-w=4)
